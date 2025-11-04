@@ -1,11 +1,11 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "maple",
-  "name": "Mint Starter Kit",
+  "name": "Deriv API v2",
   "colors": {
     "primary": "#ff444f",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "light": "#ff444f",
+    "dark": "#ff444f"
   },
   "favicon": "/favicon.svg",
   "navigation": {
@@ -84,8 +84,8 @@
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/api_v2.svg",
+    "dark": "/logo/api_v2.svg"
   },
   "navbar": {
     "links": [
