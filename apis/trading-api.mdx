@@ -1,0 +1,74 @@
+---
+title: "Trading API"
+description: "The Trading category contains all endpoints related to the complete contract lifecycle management."
+---
+
+# Trading API Endpoints Reference
+
+## Overview
+
+The **Trading** category contains all endpoints related to the complete contract lifecycle management. These endpoints enable you to:
+
+- Get real-time price proposals for various contract types
+- Purchase and sell contracts
+- Monitor open positions with live updates
+- Update contract parameters (stop loss, take profit)
+- Cancel contracts with cancellation features
+- Track transaction history in real-time
+- Manage WebSocket subscriptions for streaming data
+
+This category is essential for building trading applications, allowing full control over contract trading from proposal to settlement.
+
+---
+
+## API Endpoints Summary
+
+| API Call Name | Description | Authentication | Scopes | Subscription Support | Key Use Case |
+|--------------|-------------|----------------|---------|---------------------|--------------|
+| [`proposal`](../endpoints/proposal.md) | Gets latest price for a specific contract | No | - | Yes | Get pricing before buying contracts |
+| [`buy`](../endpoints/buy.md) | Buy a contract | Yes | trade | Yes | Purchase a contract after proposal |
+| [`proposal_open_contract`](../endpoints/proposal_open_contract.md) | Get latest price and details for open contracts | Yes | trade | Yes | Monitor open positions in real-time |
+| [`sell`](../endpoints/sell.md) | Sell a contract before expiry | Yes | trade | No | Close an open position |
+| [`contract_update`](../endpoints/contract_update.md) | Update contract conditions (stop loss/take profit) | Yes | trade | No | Modify risk management parameters |
+| [`contract_update_history`](../endpoints/contract_update_history.md) | Request contract update history | Yes | trade | No | View all modifications made to a contract |
+| [`forget`](../endpoints/forget.md) | Cancel a specific real-time stream | No | - | No | Stop receiving updates for a specific subscription |
+| [`forget_all`](../endpoints/forget_all.md) | Cancel all streams of a given type | No | - | No | Stop all subscriptions of specific types |
+| [`cancel`](../endpoints/cancel.md) | Cancel a contract with cancellation feature | Yes | trade | No | Cancel contracts that support cancellation |
+| [`transaction`](../endpoints/transaction.md) | Subscribe to transaction notifications | Yes | trade | Yes | Monitor all account transactions in real-time |
+
+---
+
+## Additional Information
+
+### Authentication & Scopes
+
+Most trading operations require authentication with the **trade** scope. You must call the [`authorize`](../endpoints/authorize.md) endpoint first with a valid API token that has trading permissions.
+
+### Subscription Pattern
+
+Many endpoints support real-time subscriptions by setting `subscribe: 1` in the request. These include:
+- `proposal` - Stream price updates
+- `buy` - Stream contract updates after purchase  
+- `proposal_open_contract` - Stream open contract updates
+- `transaction` - Stream all transaction events
+
+To cancel subscriptions, use `forget` (for specific stream ID) or `forget_all` (for stream type).
+
+### Typical Trading Flow
+
+1. **Get Pricing**: Call `proposal` to get contract price
+2. **Purchase**: Use the proposal ID with `buy` to purchase
+3. **Monitor**: Use `proposal_open_contract` to track your position
+4. **Manage Risk**: Use `contract_update` to set/modify stop loss or take profit
+5. **Close**: Use `sell` to close the position or `cancel` if cancellation is available
+
+### Error Handling
+
+All endpoints return standardized error responses. Common errors include:
+- Invalid contract parameters
+- Insufficient balance
+- Contract no longer available
+- Authentication failures
+
+Refer to individual endpoint documentation for specific error codes and handling.
+

@@ -1,0 +1,134 @@
+---
+title: "Account API"
+description: "The Account category encompasses endpoints for account authentication, balance monitoring, and accessing account history."
+---
+
+# Account API Endpoints Reference
+
+## Overview
+
+The **Account** category encompasses endpoints for account authentication, balance monitoring, and accessing account history. These endpoints enable you to:
+
+- Authenticate your WebSocket connection with API tokens
+- Exchange one-time tokens for long-lived session tokens
+- Monitor account balance in real-time
+- View detailed transaction history (statements)
+- Analyze profit and loss across all contracts
+- Manage your portfolio of open positions
+
+These endpoints are essential for account management, financial tracking, and building comprehensive trading dashboards.
+
+---
+
+## API Endpoints Summary
+
+| API Call Name | Description | Authentication | Scopes | Subscription Support | Primary Function |
+|--------------|-------------|----------------|---------|---------------------|------------------|
+| [`authorize`](../endpoints/authorize.md) | Authorize WebSocket connection with an API token | No* | - | No | Authentication |
+| [`get_session_token`](../endpoints/get_session_token.md) | Exchange one-time token for long-lived session token | No | - | No | Authentication |
+| [`balance`](../endpoints/balance.md) | Get current account balance | Yes | trade | Yes | Balance Monitoring |
+| [`statement`](../endpoints/statement.md) | Retrieve account transaction history | Yes | trade | No | Transaction History |
+| [`profit_table`](../endpoints/profit_table.md) | Retrieve profit/loss summary for closed contracts | Yes | trade | No | Profit/Loss Analysis |
+| [`portfolio`](../endpoints/portfolio.md) | View all currently open positions | Yes | trade | No | Portfolio Management |
+
+**Note**: `authorize` doesn't require prior authentication but does require a valid API token in the request.
+
+---
+
+## Additional Information
+
+### Authentication Flow
+
+**Standard Flow (API Token)**:
+1. Call `authorize` with your API token
+2. Connection is now authenticated for subsequent requests
+3. All privileged endpoints become accessible
+
+**Session Token Flow (Brand Integration)**:
+1. Receive a one-time token from the brand
+2. Call `get_session_token` to exchange it for a session token
+3. Use the session token with `authorize` for authentication
+4. Session token is long-lived and reusable
+
+### Balance Monitoring
+
+The `balance` endpoint:
+- Returns current account balance and currency
+- Supports real-time subscription for balance updates
+- Updates automatically after transactions (buy, sell, deposits, withdrawals)
+- Essential for displaying current buying power
+
+**Subscription Usage**:
+```json
+{
+  "balance": 1,
+  "subscribe": 1
+}
+```
+
+### Transaction History vs Profit Table
+
+**Statement (`statement`)**:
+- Shows ALL account transactions
+- Includes: buys, sells, deposits, withdrawals, fees
+- Filterable by date range and transaction type
+- Provides complete audit trail
+- Shows balance after each transaction
+
+**Profit Table (`profit_table`)**:
+- Shows ONLY closed contracts
+- Focuses on trading performance
+- Displays buy price, sell price, and profit/loss
+- Filterable by contract type and date range
+- Ideal for P&L reporting
+
+### Portfolio Management
+
+The `portfolio` endpoint:
+- Lists all currently OPEN positions
+- Provides contract IDs needed for other operations
+- Shows current P&L for each position
+- Essential for risk management dashboards
+- Contract IDs used with `proposal_open_contract` for detailed monitoring
+
+### Common Use Cases
+
+**Trading Dashboard**:
+- `balance` (subscribed) - Real-time balance display
+- `portfolio` - List of open positions
+- `proposal_open_contract` - Detailed view of selected position
+
+**Account History**:
+- `statement` - Complete transaction log
+- `profit_table` - Trading performance summary
+
+**Risk Management**:
+- `portfolio` - Monitor all open positions
+- `balance` - Track available funds
+- `statement` - Verify all account activity
+
+### Filtering and Pagination
+
+Most history endpoints support:
+- **Date Filtering**: `date_from` and `date_to` parameters
+- **Pagination**: `limit` and `offset` parameters
+- **Type Filtering**: Filter by contract type or action type
+- **Description Detail**: Optional detailed contract descriptions
+
+### Scopes and Permissions
+
+All authenticated account endpoints require the **trade** scope. Ensure your API token has the necessary permissions:
+- **Read**: View balance, statements, portfolio
+- **Trade**: Required for actual trading operations
+
+API tokens can be created in the account settings with specific scopes assigned.
+
+### Best Practices
+
+1. **Authentication**: Always call `authorize` first before making authenticated requests
+2. **Balance Monitoring**: Subscribe to balance updates rather than polling
+3. **Error Handling**: Check for authentication errors and token expiration
+4. **Data Caching**: Cache statement and profit table data locally to reduce API calls
+5. **Security**: Never expose API tokens in client-side code; use backend proxies
+6. **Token Rotation**: Regularly rotate API tokens for security
+

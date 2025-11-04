@@ -1,0 +1,95 @@
+---
+title: "Data API"
+description: "The Data category provides endpoints for retrieving market data and symbol information."
+---
+
+# Data API Endpoints Reference
+
+## Overview
+
+The **Data** category provides endpoints for retrieving market data and symbol information. These endpoints are fundamental for:
+
+- Discovering available trading symbols and markets
+- Understanding contract specifications and trading conditions
+- Accessing real-time price feeds
+- Retrieving historical price data for technical analysis
+- Building charts and performing market analysis
+
+These endpoints are typically the first calls made in a trading application, as they provide the foundation for understanding what can be traded and how to access price information.
+
+---
+
+## API Endpoints Summary
+
+| API Call Name | Description | Authentication | Subscription Support | Data Type | Key Use Case |
+|--------------|-------------|----------------|---------------------|-----------|--------------|
+| [`active_symbols`](../endpoints/active_symbols.md) | Retrieve list of all currently active symbols | No | No | Symbols | Get available trading instruments and their properties |
+| [`contracts_for`](../endpoints/contracts_for.md) | Get list of available contracts and trading conditions for a symbol | No | No | Contract Specifications | Understand what contract types are available for a symbol |
+| [`ticks`](../endpoints/ticks.md) | Initiate continuous stream of spot price updates | No | Yes | Real-time Ticks | Stream live price updates for market data feeds |
+| [`ticks_history`](../endpoints/ticks_history.md) | Get historic tick data for a given symbol | No | Yes (optional) | Historical Data | Retrieve historical prices for charting and analysis |
+
+---
+
+## Additional Information
+
+### No Authentication Required
+
+All data endpoints can be accessed without authentication, making them ideal for:
+- Public market data displays
+- Unauthenticated users browsing available markets
+- Building informational tools and price charts
+
+### Symbol Information
+
+Use `active_symbols` to discover:
+- Available trading symbols
+- Market categories (forex, indices, commodities, synthetic indices)
+- Whether markets are currently open
+- Trading suspension status
+- Display properties for UI rendering
+
+### Contract Information
+
+The `contracts_for` endpoint provides detailed information about:
+- Available contract types for each symbol
+- Barrier limitations and durations
+- Minimum and maximum stakes
+- Payout limits
+- Market and submarket categorization
+
+### Real-time vs Historical Data
+
+**Real-time Data (`ticks`)**:
+- Provides continuous streaming updates
+- Ideal for live price displays
+- Lower latency
+- Updates on every tick
+
+**Historical Data (`ticks_history`)**:
+- Retrieves past price data
+- Supports both tick and candle (OHLC) formats
+- Configurable time ranges and granularity
+- Can optionally subscribe for ongoing updates
+- Perfect for charting and technical analysis
+
+### Typical Data Flow
+
+1. **Discovery**: Call `active_symbols` to see what's available
+2. **Specification**: Call `contracts_for` to understand trading conditions
+3. **Current Prices**: Subscribe to `ticks` for real-time updates
+4. **Historical Analysis**: Call `ticks_history` for charting and backtesting
+
+### Performance Considerations
+
+- Use `active_symbols` with `brief` parameter for faster responses with essential fields only
+- For `ticks_history`, specify appropriate time ranges to avoid large data transfers
+- Consider caching `active_symbols` and `contracts_for` data as they don't change frequently
+- Use candles instead of ticks for historical data when possible to reduce data volume
+
+### Subscription Management
+
+When subscribing to `ticks` or `ticks_history`:
+- Each subscription returns a unique `id` in the response
+- Use this `id` with [`forget`](../endpoints/forget.md) to cancel specific subscriptions
+- Use [`forget_all`](../endpoints/forget_all.md) with `"ticks"` to cancel all tick subscriptions at once
+
