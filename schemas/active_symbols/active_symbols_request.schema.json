@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Active Symbols Request",
+  "description": "Retrieve a list of all currently active symbols (underlying markets upon which contracts are available for trading).",
+  "type": "object",
+  "properties": {
+    "active_symbols": {
+      "type": "string",
+      "description": "If you use `brief`, only a subset of fields will be returned."
+    },
+    "contract_type": {
+      "type": "array",
+      "description": "The proposed contract type",
+      "items": {
+        "type": "string"
+      }
+    },
+    "passthrough": {
+      "type": "object",
+      "description": "Used to pass data through the websocket, which may be retrieved via the `echo_req` output field."
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Used to map request to response."
+    }
+  },
+  "required": ["active_symbols"],
+  "additionalProperties": false
+}
+

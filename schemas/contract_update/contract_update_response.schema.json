@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Contract Update Response",
+  "description": "Response for contract_update request, containing the update status",
+  "type": "object",
+  "properties": {
+    "contract_update": {
+      "type": "object",
+      "description": "Contains the update status of the request",
+      "properties": {
+        "stop_loss": {
+          "type": "object",
+          "description": "The target spot price where the contract will be closed automatically at the loss specified by the user.",
+          "properties": {
+            "display_name": {
+              "type": "string",
+              "description": "Localized display name"
+            },
+            "display_order_amount": {
+              "type": "string",
+              "description": "Display order amount"
+            },
+            "order_amount": {
+              "type": ["null", "number"],
+              "description": "Stop loss amount"
+            },
+            "order_date": {
+              "type": "integer",
+              "description": "Stop loss order epoch"
+            },
+            "value": {
+              "type": ["null", "string"],
+              "description": "Stop loss pip-sized barrier value"
+            }
+          }
+        },
+        "take_profit": {
+          "type": "object",
+          "description": "The target spot price where the contract will be closed automatically at the profit specified by the user.",
+          "properties": {
+            "display_name": {
+              "type": "string",
+              "description": "Localized display name"
+            },
+            "display_order_amount": {
+              "type": "string",
+              "description": "Display order amount"
+            },
+            "order_amount": {
+              "type": ["null", "number"],
+              "description": "Take profit amount"
+            },
+            "order_date": {
+              "type": "integer",
+              "description": "Take profit order epoch"
+            },
+            "value": {
+              "type": ["null", "string"],
+              "description": "Take profit pip-sized barrier value"
+            }
+          }
+        }
+      }
+    },
+    "echo_req": {
+      "type": "object",
+      "description": "Echo of the request made."
+    },
+    "msg_type": {
+      "type": "string",
+      "description": "Action name of the request made.",
+      "enum": ["contract_update"]
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Optional field sent in request to map to response, present only when request contains `req_id`."
+    }
+  },
+  "required": ["contract_update", "echo_req", "msg_type"],
+  "additionalProperties": false
+}
+

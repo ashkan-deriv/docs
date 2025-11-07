@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Forget All Response",
+  "description": "Response for forget_all request, containing IDs of cancelled streams",
+  "type": "object",
+  "properties": {
+    "forget_all": {
+      "type": "array",
+      "description": "IDs of the cancelled streams",
+      "items": {
+        "type": "string"
+      }
+    },
+    "echo_req": {
+      "type": "object",
+      "description": "Echo of the request made."
+    },
+    "msg_type": {
+      "type": "string",
+      "description": "Action name of the request made.",
+      "enum": ["forget_all"]
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Optional field sent in request to map to response, present only when request contains `req_id`."
+    }
+  },
+  "required": ["forget_all", "echo_req", "msg_type"],
+  "additionalProperties": false
+}
+

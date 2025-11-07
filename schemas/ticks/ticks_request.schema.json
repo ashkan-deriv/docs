@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Ticks Request",
+  "description": "Initiate a continuous stream of spot price updates for a given symbol.",
+  "type": "object",
+  "properties": {
+    "ticks": {
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "The short symbol name (obtained from `active_symbols` call)."
+        },
+        {
+          "type": "array",
+          "description": "Array of symbols",
+          "items": {
+            "type": "string"
+          }
+        }
+      ],
+      "description": "The short symbol name or array of symbols (obtained from `active_symbols` call)."
+    },
+    "passthrough": {
+      "type": "object",
+      "description": "Used to pass data through the websocket, which may be retrieved via the `echo_req` output field."
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Used to map request to response."
+    },
+    "subscribe": {
+      "type": "integer",
+      "description": "If set to 1, will send updates whenever a new tick is received.",
+      "enum": [0, 1]
+    }
+  },
+  "required": ["ticks"],
+  "additionalProperties": false
+}
+

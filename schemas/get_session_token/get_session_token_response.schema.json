@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Get Session Token Response",
+  "description": "Response for get_session_token request, containing information about issued session token",
+  "type": "object",
+  "properties": {
+    "get_session_token": {
+      "type": "object",
+      "description": "Information about issued session token",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "The session token"
+        },
+        "expires": {
+          "type": "string",
+          "description": "The timestamp when the issued session token expires"
+        }
+      },
+      "required": ["token", "expires"]
+    },
+    "echo_req": {
+      "type": "object",
+      "description": "Echo of the request made."
+    },
+    "msg_type": {
+      "type": "string",
+      "description": "Action name of the request made.",
+      "enum": ["get_session_token"]
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Optional field sent in request to map to response, present only when request contains `req_id`."
+    }
+  },
+  "required": ["get_session_token", "echo_req", "msg_type"],
+  "additionalProperties": false
+}
+

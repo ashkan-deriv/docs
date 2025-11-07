@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Authorize Response",
+  "description": "Response for authorize request, containing account information for the holder of the token.",
+  "type": "object",
+  "properties": {
+    "authorize": {
+      "type": "object",
+      "description": "Account information for the holder of the token.",
+      "properties": {
+        "balance": {
+          "type": "number",
+          "description": "Cash balance of the account."
+        },
+        "currency": {
+          "type": "string",
+          "description": "Currency of the account."
+        },
+        "loginid": {
+          "type": "string",
+          "description": "The account ID that the token was issued for."
+        },
+        "is_virtual": {
+          "type": "integer",
+          "description": "Flag indicating whether the account is virtual (1) or real (0)."
+        },
+        "scopes": {
+          "type": "array",
+          "description": "Scopes available for the token.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["balance", "currency", "loginid"]
+    },
+    "echo_req": {
+      "type": "object",
+      "description": "Echo of the request made."
+    },
+    "msg_type": {
+      "type": "string",
+      "description": "Action name of the request made.",
+      "enum": ["authorize"]
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Optional field sent in request to map to response, present only when request contains `req_id`."
+    }
+  },
+  "required": ["authorize", "echo_req", "msg_type"],
+  "additionalProperties": false
+}
+

@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Sell Response",
+  "description": "Response for sell request, containing receipt for the transaction",
+  "type": "object",
+  "properties": {
+    "sell": {
+      "type": "object",
+      "description": "Receipt for the transaction",
+      "properties": {
+        "balance_after": {
+          "type": "number",
+          "description": "New account balance after completion of the sale"
+        },
+        "contract_id": {
+          "type": "integer",
+          "description": "Internal contract identifier for the sold contract"
+        },
+        "reference_id": {
+          "type": "integer",
+          "description": "Internal transaction identifier for the corresponding buy transaction"
+        },
+        "sold_for": {
+          "type": "number",
+          "description": "Actual effected sale price"
+        },
+        "transaction_id": {
+          "type": "integer",
+          "description": "Internal transaction identifier for the sale transaction"
+        }
+      },
+      "required": [
+        "balance_after",
+        "contract_id",
+        "reference_id",
+        "sold_for",
+        "transaction_id"
+      ]
+    },
+    "echo_req": {
+      "type": "object",
+      "description": "Echo of the request made."
+    },
+    "msg_type": {
+      "type": "string",
+      "description": "Action name of the request made.",
+      "enum": ["sell"]
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Optional field sent in request to map to response, present only when request contains `req_id`."
+    }
+  },
+  "required": ["sell", "echo_req", "msg_type"],
+  "additionalProperties": false
+}
+

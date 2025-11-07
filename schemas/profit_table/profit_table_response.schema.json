@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Profit Table Response",
+  "description": "Response for profit_table request, containing account profit table",
+  "type": "object",
+  "properties": {
+    "profit_table": {
+      "type": "object",
+      "description": "Account Profit Table.",
+      "properties": {
+        "count": {
+          "type": "number",
+          "description": "Number of transactions returned in this call"
+        },
+        "transactions": {
+          "type": "array",
+          "description": "Array of returned transactions",
+          "items": {
+            "type": "object",
+            "properties": {
+              "app_id": {
+                "type": "integer",
+                "description": "ID of the application"
+              },
+              "buy_price": {
+                "type": "number",
+                "description": "The buy price"
+              },
+              "contract_id": {
+                "type": ["integer", "null"],
+                "description": "The unique contract identifier."
+              },
+              "contract_type": {
+                "type": "string",
+                "description": "[Optional] The contract type for the transaction if description is set to 1."
+              },
+              "deal_cancellation_duration": {
+                "type": "string",
+                "description": "[Optional] Duration set for deal cancellation for Multiplier contracts in synthetic indices if description is set to 1."
+              },
+              "duration_type": {
+                "type": ["null", "string"],
+                "description": "[Optional] The duration type of the contract if description is set to 1."
+              },
+              "growth_rate": {
+                "type": "string",
+                "description": "[Optional] The growth rate for Accumulators contract if description is set to 1."
+              },
+              "longcode": {
+                "type": "string",
+                "description": "[Optional] The description of contract purchased if description is set to 1"
+              },
+              "multiplier": {
+                "type": "string",
+                "description": "[Optional] The multiplier for Multiplier contracts if description is set to 1."
+              },
+              "payout": {
+                "type": "number",
+                "description": "Payout price"
+              },
+              "purchase_time": {
+                "type": "integer",
+                "description": "Epoch purchase time of the transaction"
+              },
+              "sell_price": {
+                "type": "number",
+                "description": "The price the contract sold for."
+              },
+              "sell_time": {
+                "type": ["integer", "null"],
+                "description": "Epoch sell time of the transaction"
+              },
+              "shortcode": {
+                "type": "string",
+                "description": "[Optional] Compact description of the contract purchased if description is set to 1"
+              },
+              "transaction_id": {
+                "type": "integer",
+                "description": "The transaction Identifier. Every contract (buy or sell) and every payment has a unique transaction identifier."
+              },
+              "underlying_symbol": {
+                "type": "string",
+                "description": "[Optional] Symbol code if description is set to 1"
+              }
+            },
+            "required": ["buy_price", "payout", "purchase_time", "sell_price", "transaction_id"]
+          }
+        }
+      },
+      "required": ["count", "transactions"]
+    },
+    "echo_req": {
+      "type": "object",
+      "description": "Echo of the request made."
+    },
+    "msg_type": {
+      "type": "string",
+      "description": "Action name of the request made.",
+      "enum": ["profit_table"]
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Optional field sent in request to map to response, present only when request contains `req_id`."
+    }
+  },
+  "required": ["profit_table", "msg_type"],
+  "additionalProperties": false
+}
+

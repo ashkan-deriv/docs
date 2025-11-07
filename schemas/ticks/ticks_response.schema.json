@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Ticks Response",
+  "description": "Response for ticks request, containing tick data",
+  "type": "object",
+  "properties": {
+    "tick": {
+      "type": "object",
+      "description": "Tick by tick list of streamed data",
+      "properties": {
+        "ask": {
+          "type": "number",
+          "description": "Market ask at the epoch"
+        },
+        "bid": {
+          "type": "number",
+          "description": "Market bid at the epoch"
+        },
+        "epoch": {
+          "type": "integer",
+          "description": "Epoch time of the tick"
+        },
+        "id": {
+          "type": "string",
+          "description": "A per-connection unique identifier. Can be passed to the `forget` API call to unsubscribe."
+        },
+        "pip_size": {
+          "type": "number",
+          "description": "Indicates the number of decimal points that the returned amounts must be displayed with"
+        },
+        "quote": {
+          "type": "number",
+          "description": "Market value at the epoch"
+        },
+        "symbol": {
+          "type": "string",
+          "description": "Symbol"
+        }
+      },
+      "required": ["epoch", "quote", "symbol"]
+    },
+    "echo_req": {
+      "type": "object",
+      "description": "Echo of the request made."
+    },
+    "msg_type": {
+      "type": "string",
+      "description": "Type of the response.",
+      "enum": ["tick"]
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Optional field sent in request to map to response, present only when request contains `req_id`."
+    },
+    "subscription": {
+      "type": "object",
+      "description": "For subscription requests only.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A per-connection unique identifier. Can be passed to the `forget` API call to unsubscribe."
+        }
+      },
+      "required": ["id"]
+    }
+  },
+  "required": ["tick", "msg_type"],
+  "additionalProperties": false
+}
+

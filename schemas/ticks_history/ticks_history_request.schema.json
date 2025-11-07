@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Ticks History Request",
+  "description": "Get historic tick data for a given symbol.",
+  "type": "object",
+  "properties": {
+    "ticks_history": {
+      "type": "string",
+      "description": "Short symbol name (obtained from the `active_symbols` call)."
+    },
+    "end": {
+      "type": "string",
+      "description": "Epoch value representing the latest boundary of the returned ticks. If `latest` is specified, this will be the latest available timestamp."
+    },
+    "adjust_start_time": {
+      "type": "integer",
+      "description": "1 - if the market is closed at the end time, or license limit is before end time, adjust interval backwards to compensate.",
+      "enum": [0, 1]
+    },
+    "count": {
+      "type": "integer",
+      "description": "An upper limit on ticks to receive."
+    },
+    "granularity": {
+      "type": "integer",
+      "description": "Only applicable for style: `candles`. Candle time-dimension width setting. (default: `60`)."
+    },
+    "passthrough": {
+      "type": "object",
+      "description": "Used to pass data through the websocket, which may be retrieved via the `echo_req` output field."
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Used to map request to response."
+    },
+    "start": {
+      "type": "integer",
+      "description": "Epoch value representing the earliest boundary of the returned ticks. \n- For `\"style\": \"ticks\"`: this will default to 1 day ago.\n- For `\"style\": \"candles\"`: it will default to 1 day ago if count or granularity is undefined."
+    },
+    "style": {
+      "type": "string",
+      "description": "The tick-output style.",
+      "enum": ["ticks", "candles"]
+    },
+    "subscribe": {
+      "type": "integer",
+      "description": "1 - to send updates whenever a new tick is received.",
+      "enum": [0, 1]
+    }
+  },
+  "required": ["ticks_history", "end"],
+  "additionalProperties": false
+}
+

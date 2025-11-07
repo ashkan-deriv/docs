@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Buy Response",
+  "description": "Response for buy request, containing receipt confirmation for the purchase",
+  "type": "object",
+  "properties": {
+    "buy": {
+      "type": "object",
+      "description": "Receipt confirmation for the purchase",
+      "properties": {
+        "balance_after": {
+          "type": "number",
+          "description": "The new account balance after completion of the purchase"
+        },
+        "buy_price": {
+          "type": "number",
+          "description": "Actual effected purchase price"
+        },
+        "contract_id": {
+          "type": "integer",
+          "description": "Internal contract identifier"
+        },
+        "longcode": {
+          "type": "string",
+          "description": "The description of contract purchased"
+        },
+        "payout": {
+          "type": "number",
+          "description": "Proposed payout value"
+        },
+        "purchase_time": {
+          "type": "integer",
+          "description": "Epoch value of the transaction purchase time"
+        },
+        "shortcode": {
+          "type": "string",
+          "description": "Compact description of the contract purchased"
+        },
+        "start_time": {
+          "type": "integer",
+          "description": "Epoch value showing the expected start time of the contract"
+        },
+        "transaction_id": {
+          "type": "integer",
+          "description": "Internal transaction identifier"
+        }
+      },
+      "required": [
+        "balance_after",
+        "buy_price",
+        "contract_id",
+        "longcode",
+        "payout",
+        "purchase_time",
+        "shortcode",
+        "start_time",
+        "transaction_id"
+      ]
+    },
+    "echo_req": {
+      "type": "object",
+      "description": "Echo of the request made."
+    },
+    "msg_type": {
+      "type": "string",
+      "description": "Action name of the request made.",
+      "enum": ["buy"]
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Optional field sent in request to map to response, present only when request contains `req_id`."
+    },
+    "subscription": {
+      "type": "object",
+      "description": "For subscription requests only.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A per-connection unique identifier. Can be passed to the `forget` API call to unsubscribe."
+        }
+      },
+      "required": ["id"]
+    }
+  },
+  "required": ["buy", "echo_req", "msg_type"],
+  "additionalProperties": false
+}
+

@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Authorize Request",
+  "description": "Authorize current WebSocket connection to act on behalf of the owner of a given token. Must precede requests that need to access client account, for example purchasing and selling contracts or viewing portfolio.",
+  "type": "object",
+  "properties": {
+    "authorize": {
+      "type": "string",
+      "description": "Authentication token. May be retrieved from brands Manager API."
+    },
+    "passthrough": {
+      "type": "object",
+      "description": "Used to pass data through the websocket, which may be retrieved via the `echo_req` output field."
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Used to map request to response."
+    }
+  },
+  "required": ["authorize"],
+  "additionalProperties": false
+}
+

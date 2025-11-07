@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Buy Request",
+  "description": "Buy a Contract",
+  "type": "object",
+  "properties": {
+    "buy": {
+      "type": "string",
+      "description": "Either the ID received from a Price Proposal (`proposal` call), or `1` if contract buy parameters are passed in the `parameters` field."
+    },
+    "parameters": {
+      "type": "object",
+      "description": "Used to pass the parameters for contract buy."
+    },
+    "passthrough": {
+      "type": "object",
+      "description": "Used to pass data through the websocket, which may be retrieved via the `echo_req` output field."
+    },
+    "price": {
+      "type": "number",
+      "description": "Maximum price at which to purchase the contract."
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Used to map request to response."
+    },
+    "subscribe": {
+      "type": "integer",
+      "description": "`1` to stream.",
+      "enum": [0, 1]
+    }
+  },
+  "required": ["buy", "price"],
+  "additionalProperties": false
+}
+

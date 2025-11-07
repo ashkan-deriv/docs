@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Profit Table Request",
+  "description": "Retrieve a summary of account Profit Table, according to given search criteria",
+  "type": "object",
+  "properties": {
+    "profit_table": {
+      "type": "integer",
+      "description": "Must be `1`",
+      "enum": [1]
+    },
+    "contract_type": {
+      "type": "array",
+      "description": "Return only contracts of the specified types",
+      "items": {
+        "type": "string"
+      }
+    },
+    "date_from": {
+      "type": "string",
+      "description": "Start date (epoch or YYYY-MM-DD)"
+    },
+    "date_to": {
+      "type": "string",
+      "description": "End date (epoch or YYYY-MM-DD)"
+    },
+    "description": {
+      "type": "integer",
+      "description": "If set to 1, will return full contracts description.",
+      "enum": [0, 1]
+    },
+    "limit": {
+      "type": "number",
+      "description": "Apply upper limit to count of transactions received."
+    },
+    "offset": {
+      "type": "integer",
+      "description": "Number of transactions to skip."
+    },
+    "passthrough": {
+      "type": "object",
+      "description": "Used to pass data through the websocket, which may be retrieved via the `echo_req` output field."
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Used to map request to response."
+    },
+    "sort": {
+      "type": "string",
+      "description": "Sort direction."
+    }
+  },
+  "required": ["profit_table"],
+  "additionalProperties": false
+}
+

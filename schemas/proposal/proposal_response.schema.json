@@ -1,0 +1,332 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Proposal Response",
+  "description": "Response for proposal request, containing latest price and details for a given contract",
+  "type": "object",
+  "properties": {
+    "proposal": {
+      "type": "object",
+      "description": "Latest price and other details for a given contract",
+      "properties": {
+        "ask_price": {
+          "type": ["number", "string"],
+          "description": "The ask price."
+        },
+        "barrier_choices": {
+          "type": "array",
+          "description": "[Only for vanilla options] The choices of predefined strike price for client to choose"
+        },
+        "barrier_spot_distance": {
+          "type": "string",
+          "description": "[Only for Turbos] The relative distance between current spot and the barrier."
+        },
+        "cancellation": {
+          "type": "object",
+          "description": "Contains information about contract cancellation option.",
+          "properties": {
+            "ask_price": {
+              "type": "number",
+              "description": "Ask price of contract cancellation option."
+            },
+            "date_expiry": {
+              "type": "integer",
+              "description": "Expiry time in epoch for contract cancellation option."
+            }
+          }
+        },
+        "commission": {
+          "type": ["null", "number", "string"],
+          "description": "Commission changed in percentage (%)."
+        },
+        "contract_details": {
+          "type": "object",
+          "description": "Contains contract information.",
+          "properties": {
+            "app_markup_amount": {
+              "type": "string",
+              "description": "The markup amount charged on a client's stake amount"
+            },
+            "barrier": {
+              "type": "string",
+              "description": "Barrier of the contract."
+            },
+            "barrier_spot_distance": {
+              "type": "string",
+              "description": "Absolute difference between high/low barrier and spot"
+            },
+            "high_barrier": {
+              "type": "string",
+              "description": "High barrier calculated based on current spot"
+            },
+            "last_tick_epoch": {
+              "type": "integer",
+              "description": "Epoch of last tick considered for stat chart"
+            },
+            "low_barrier": {
+              "type": "string",
+              "description": "Low barrier calculated based on current spot"
+            },
+            "maximum_payout": {
+              "type": "number",
+              "description": "Maximum payout that user can get out of a contract, contract will close automatically if payout reaches this number"
+            },
+            "maximum_stake": {
+              "type": "string",
+              "description": "Maximum stake that user can set to buy a contract"
+            },
+            "maximum_ticks": {
+              "type": "integer",
+              "description": "Maximum duration that a contract can last, contract will close automatically after this number of ticks"
+            },
+            "minimum_stake": {
+              "type": "string",
+              "description": "Minimum stake that user can set to buy a contract"
+            },
+            "tick_size_barrier": {
+              "type": "number",
+              "description": "Tick size barrier for Accumulator contracts"
+            },
+            "tick_size_barrier_percentage": {
+              "type": "string",
+              "description": "[Accumulator] Tick size barrier in percentage, rounded off to 5 decimal places"
+            },
+            "ticks_stayed_in": {
+              "type": "array",
+              "description": "An array of numbers to build a stat chart - each number represents the duration that spot stayed between barriers"
+            }
+          }
+        },
+        "date_expiry": {
+          "type": "integer",
+          "description": "The end date of the contract."
+        },
+        "date_start": {
+          "type": "integer",
+          "description": "The start date of the contract."
+        },
+        "display_number_of_contracts": {
+          "type": "string",
+          "description": "[Only for vanilla or turbos options] The implied number of contracts"
+        },
+        "display_value": {
+          "type": "string",
+          "description": "Display value for the contract"
+        },
+        "id": {
+          "type": "string",
+          "description": "A per-connection unique identifier. Can be passed to the `forget` API call to unsubscribe."
+        },
+        "limit_order": {
+          "type": "object",
+          "description": "Contains limit order information. (Only applicable for contract with limit order).",
+          "properties": {
+            "stop_loss": {
+              "type": "object",
+              "description": "Contains information where the contract will be closed automatically at the loss specified by the user.",
+              "properties": {
+                "display_name": {
+                  "type": "string",
+                  "description": "Localized display name"
+                },
+                "display_order_amount": {
+                  "type": ["null", "string"],
+                  "description": "Stop loss amount for display purpose."
+                },
+                "order_amount": {
+                  "type": ["null", "number"],
+                  "description": "Stop loss amount. Will be deprecated soon. Please use [display_order_amount]."
+                },
+                "order_date": {
+                  "type": "integer",
+                  "description": "Stop loss order epoch"
+                },
+                "value": {
+                  "type": ["null", "string"],
+                  "description": "Pip-sized barrier value"
+                }
+              }
+            },
+            "stop_out": {
+              "type": "object",
+              "description": "Contains information where the contract will be closed automatically when the value of the contract is close to zero. This is set by the us.",
+              "properties": {
+                "display_name": {
+                  "type": "string",
+                  "description": "Localized display name"
+                },
+                "display_order_amount": {
+                  "type": ["null", "string"],
+                  "description": "Stop out amount for display purpose."
+                },
+                "order_amount": {
+                  "type": ["null", "number"],
+                  "description": "Stop out amount. Will be deprecated soon. Please use [display_order_amount]."
+                },
+                "order_date": {
+                  "type": "integer",
+                  "description": "Stop out order epoch"
+                },
+                "value": {
+                  "type": "string",
+                  "description": "Pip-sized barrier value"
+                }
+              }
+            },
+            "take_profit": {
+              "type": "object",
+              "description": "Contains information where the contract will be closed automatically at the profit specified by the user.",
+              "properties": {
+                "display_name": {
+                  "type": "string",
+                  "description": "Localized display name"
+                },
+                "display_order_amount": {
+                  "type": ["null", "string"],
+                  "description": "Take profit amount for display purpose."
+                },
+                "order_amount": {
+                  "type": ["null", "number"],
+                  "description": "Take profit amount. Will be deprecated soon. Please use [display_order_amount]."
+                },
+                "order_date": {
+                  "type": "integer",
+                  "description": "Take profit order epoch"
+                },
+                "value": {
+                  "type": ["null", "string"],
+                  "description": "Pip-sized barrier value"
+                }
+              }
+            }
+          }
+        },
+        "longcode": {
+          "type": "string",
+          "description": "Example: Win payout if Random 100 Index is strictly higher than entry spot at 15 minutes after contract start time."
+        },
+        "max_stake": {
+          "type": "number",
+          "description": "[Only for vanilla or turbos options] Maximum stakes allowed"
+        },
+        "min_stake": {
+          "type": "number",
+          "description": "[Only for vanilla or turbos options] Minimum stakes allowed"
+        },
+        "multiplier": {
+          "type": "number",
+          "description": "[Only for lookback trades] Multiplier applies when calculating the final payoff for each type of lookback. e.g. (Exit spot - Lowest historical price) * multiplier = Payout"
+        },
+        "payout": {
+          "type": ["number", "string"],
+          "description": "The payout amount of the contract."
+        },
+        "payout_choices": {
+          "type": "array",
+          "description": "[Only for Turbos] The choices of predefined payout per point for client to choose"
+        },
+        "spot": {
+          "type": "number",
+          "description": "Spot value (if there are no Exchange data-feed licensing restrictions for the underlying symbol)."
+        },
+        "spot_time": {
+          "type": "integer",
+          "description": "The corresponding time of the spot value."
+        },
+        "validation_params": {
+          "type": "object",
+          "description": "Contains contract validation information.",
+          "properties": {
+            "max_payout": {
+              "type": "string",
+              "description": "[Only for Accumulators] Maximum payout for the contract."
+            },
+            "max_ticks": {
+              "type": "integer",
+              "description": "[Only for Accumulators] Maximum ticks for the contract."
+            },
+            "payout": {
+              "type": "object",
+              "description": "Contains information for minimum and maximum payout amount for the contract.",
+              "properties": {
+                "max": {
+                  "type": "string",
+                  "description": "Maximum payout allowed"
+                }
+              }
+            },
+            "stake": {
+              "type": "object",
+              "description": "Contains information for minimum and maximum stake amount for the contract.",
+              "properties": {
+                "max": {
+                  "type": "string",
+                  "description": "Maximum stake allowed"
+                },
+                "min": {
+                  "type": "string",
+                  "description": "Minimum stake allowed"
+                }
+              }
+            },
+            "stop_loss": {
+              "type": "object",
+              "description": "[Only for Multipliers] Contains information for minimum and maximum stop loss amount for the contract.",
+              "properties": {
+                "max": {
+                  "type": "string",
+                  "description": "Maximum stop loss amount"
+                },
+                "min": {
+                  "type": "string",
+                  "description": "Minimum stop loss amount"
+                }
+              }
+            },
+            "take_profit": {
+              "type": "object",
+              "description": "Contains information for minimum and maximum take profit amount for the contract.",
+              "properties": {
+                "max": {
+                  "type": "string",
+                  "description": "Maximum take profit amount"
+                },
+                "min": {
+                  "type": "string",
+                  "description": "Minimum take profit amount"
+                }
+              }
+            }
+          }
+        }
+      },
+      "required": ["id"]
+    },
+    "echo_req": {
+      "type": "object",
+      "description": "Echo of the request made."
+    },
+    "msg_type": {
+      "type": "string",
+      "description": "Action name of the request made.",
+      "enum": ["proposal"]
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Optional field sent in request to map to response, present only when request contains `req_id`."
+    },
+    "subscription": {
+      "type": "object",
+      "description": "For subscription requests only.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A per-connection unique identifier. Can be passed to the `forget` API call to unsubscribe."
+        }
+      },
+      "required": ["id"]
+    }
+  },
+  "required": ["proposal", "msg_type"],
+  "additionalProperties": false
+}
+

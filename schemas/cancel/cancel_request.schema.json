@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Cancel Request",
+  "description": "Cancel contract with contract id",
+  "type": "object",
+  "properties": {
+    "cancel": {
+      "type": "integer",
+      "description": "Value should be the `contract_id` which received from the `portfolio` call."
+    },
+    "passthrough": {
+      "type": "object",
+      "description": "Used to pass data through the websocket, which may be retrieved via the `echo_req` output field."
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Used to map request to response."
+    }
+  },
+  "required": ["cancel"],
+  "additionalProperties": false
+}
+

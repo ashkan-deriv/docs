@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Contract Update Request",
+  "description": "Update a contract condition.",
+  "type": "object",
+  "properties": {
+    "contract_update": {
+      "type": "integer",
+      "description": "Must be `1`",
+      "enum": [1]
+    },
+    "contract_id": {
+      "type": "integer",
+      "description": "Internal unique contract identifier."
+    },
+    "limit_order": {
+      "type": "object",
+      "description": "Specify limit order to update."
+    },
+    "passthrough": {
+      "type": "object",
+      "description": "Used to pass data through the websocket, which may be retrieved via the `echo_req` output field."
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Used to map request to response."
+    }
+  },
+  "required": ["contract_update", "contract_id", "limit_order"],
+  "additionalProperties": false
+}
+

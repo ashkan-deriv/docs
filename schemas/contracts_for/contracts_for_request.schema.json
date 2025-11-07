@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Contracts For Request",
+  "description": "For a given symbol, get the list of currently available contracts, and the latest barrier and duration limits for each contract.",
+  "type": "object",
+  "properties": {
+    "contracts_for": {
+      "type": "string",
+      "description": "The short symbol name (obtained from `active_symbols` call)."
+    },
+    "passthrough": {
+      "type": "object",
+      "description": "Used to pass data through the websocket, which may be retrieved via the `echo_req` output field."
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Used to map request to response."
+    }
+  },
+  "required": ["contracts_for"],
+  "additionalProperties": false
+}
+

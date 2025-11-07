@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Get Session Token Request",
+  "description": "Exchange short-living one-time token received from the brand for a session token that is valid for a long time and can be used multiple times.",
+  "type": "object",
+  "properties": {
+    "get_session_token": {
+      "type": "string",
+      "description": "The one-time token from the brand"
+    },
+    "passthrough": {
+      "type": "object",
+      "description": "Used to pass data through the websocket, which may be retrieved via the `echo_req` output field."
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Used to map request to response."
+    }
+  },
+  "required": ["get_session_token"],
+  "additionalProperties": false
+}
+

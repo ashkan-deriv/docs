@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Statement Response",
+  "description": "Response for statement request, containing account statement",
+  "type": "object",
+  "properties": {
+    "statement": {
+      "type": "object",
+      "description": "Account statement.",
+      "properties": {
+        "count": {
+          "type": "number",
+          "description": "Number of transactions returned in this call"
+        },
+        "transactions": {
+          "type": "array",
+          "description": "Array of returned transactions",
+          "items": {
+            "type": "object",
+            "properties": {
+              "action_type": {
+                "type": "string",
+                "description": "It is the type of action."
+              },
+              "amount": {
+                "type": "number",
+                "description": "It is the amount of transaction."
+              },
+              "balance_after": {
+                "type": "number",
+                "description": "It is the remaining balance."
+              },
+              "contract_id": {
+                "type": ["integer", "null"],
+                "description": "It is the contract ID."
+              },
+              "longcode": {
+                "type": "string",
+                "description": "The description of contract purchased if description is set to `1`."
+              },
+              "payout": {
+                "type": ["null", "number"],
+                "description": "Payout price"
+              },
+              "purchase_time": {
+                "type": "integer",
+                "description": "Time at which contract was purchased, present only for sell transaction"
+              },
+              "reference_id": {
+                "type": ["integer", "null"],
+                "description": "Internal transaction identifier for the corresponding buy transaction ( set only for contract selling )"
+              },
+              "shortcode": {
+                "type": ["null", "string"],
+                "description": "Compact description of the contract purchased if description is set to `1`."
+              },
+              "transaction_id": {
+                "type": "integer",
+                "description": "It is the transaction ID. In statement every contract (buy or sell) and every payment has a unique ID."
+              },
+              "transaction_time": {
+                "type": "integer",
+                "description": "It is the time of transaction."
+              }
+            },
+            "required": ["action_type", "amount", "balance_after", "transaction_id", "transaction_time"]
+          }
+        }
+      },
+      "required": ["count", "transactions"]
+    },
+    "echo_req": {
+      "type": "object",
+      "description": "Echo of the request made."
+    },
+    "msg_type": {
+      "type": "string",
+      "description": "Action name of the request made.",
+      "enum": ["statement"]
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Optional field sent in request to map to response, present only when request contains `req_id`."
+    }
+  },
+  "required": ["statement", "msg_type"],
+  "additionalProperties": false
+}
+

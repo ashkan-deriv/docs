@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Forget All Request",
+  "description": "Immediately cancel the real-time streams of messages of given type.",
+  "type": "object",
+  "properties": {
+    "forget_all": {
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "Cancel all streams of a single type"
+        },
+        {
+          "type": "array",
+          "description": "Cancel all streams of multiple types",
+          "items": {
+            "type": "string"
+          }
+        }
+      ],
+      "description": "Cancel all streams by type. The value can be either a single type e.g. `\"ticks\"`, or an array of multiple types e.g. `[\"candles\", \"ticks\"]`."
+    },
+    "passthrough": {
+      "type": "object",
+      "description": "Used to pass data through the websocket, which may be retrieved via the `echo_req` output field."
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Used to map request to response."
+    }
+  },
+  "required": ["forget_all"],
+  "additionalProperties": false
+}
+

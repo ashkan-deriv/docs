@@ -25,7 +25,6 @@
       },
       {
         "tab": "API reference",
-        "asyncapi": "/asyncapi.json",
         "groups": [
           {
             "group": "Overview",
@@ -35,7 +34,10 @@
           },
           {
             "group": "WebSocket API",
-            "pages": []
+            "asyncapi": {
+              "source": "/asyncapi.json",
+              "directory": "apis"
+            }
           },
           {
             "group": "API documentation",

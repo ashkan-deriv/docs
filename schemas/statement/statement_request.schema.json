@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Statement Request",
+  "description": "Retrieve a summary of account transactions, according to given search criteria",
+  "type": "object",
+  "properties": {
+    "statement": {
+      "type": "integer",
+      "description": "Must be `1`",
+      "enum": [1]
+    },
+    "action_type": {
+      "type": "string",
+      "description": "To filter the statement according to the type of transaction."
+    },
+    "date_from": {
+      "type": "integer",
+      "description": "Start date (epoch)"
+    },
+    "date_to": {
+      "type": "integer",
+      "description": "End date (epoch)"
+    },
+    "description": {
+      "type": "integer",
+      "description": "If set to 1, will return full contracts description.",
+      "enum": [0, 1]
+    },
+    "limit": {
+      "type": "number",
+      "description": "Maximum number of transactions to receive."
+    },
+    "offset": {
+      "type": "integer",
+      "description": "Number of transactions to skip."
+    },
+    "passthrough": {
+      "type": "object",
+      "description": "Used to pass data through the websocket, which may be retrieved via the `echo_req` output field."
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Used to map request to response."
+    }
+  },
+  "required": ["statement"],
+  "additionalProperties": false
+}
+

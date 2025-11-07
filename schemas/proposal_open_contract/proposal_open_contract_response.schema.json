@@ -1,0 +1,511 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Proposal Open Contract Response",
+  "description": "Response for proposal_open_contract request, containing latest price and details for an open contract",
+  "type": "object",
+  "properties": {
+    "proposal_open_contract": {
+      "type": "object",
+      "description": "Latest price and other details for an open contract",
+      "properties": {
+        "account_id": {
+          "type": "number",
+          "description": "Account Id"
+        },
+        "app_markup_amount": {
+          "type": "string",
+          "description": "The markup amount charged on a client's stake amount"
+        },
+        "audit_details": {
+          "type": ["null", "object"],
+          "description": "Tick details around contract start and end time."
+        },
+        "barrier": {
+          "type": ["null", "string"],
+          "description": "Barrier of the contract (if any)."
+        },
+        "barrier_count": {
+          "type": "number",
+          "description": "The number of barriers a contract has."
+        },
+        "barrier_spot_distance": {
+          "type": "string",
+          "description": "[Only for accumulator] Absolute difference between high/low barrier and spot"
+        },
+        "bid_price": {
+          "type": ["string", "number"],
+          "description": "Price at which the contract could be sold back to the company."
+        },
+        "buy_price": {
+          "type": ["string", "number"],
+          "description": "Price at which contract was purchased"
+        },
+        "cancellation": {
+          "type": "object",
+          "description": "Contains information about contract cancellation option.",
+          "properties": {
+            "ask_price": {
+              "type": ["null", "number"],
+              "description": "Ask price of contract cancellation option."
+            },
+            "date_expiry": {
+              "type": "integer",
+              "description": "Expiry time in epoch for contract cancellation option."
+            }
+          }
+        },
+        "commision": {
+          "type": ["null", "string"],
+          "description": "Commission in payout currency amount."
+        },
+        "commission": {
+          "type": ["null", "number", "string"],
+          "description": "Commission in payout currency amount."
+        },
+        "contract_id": {
+          "type": "integer",
+          "description": "The internal contract identifier"
+        },
+        "contract_type": {
+          "type": "string",
+          "description": "Contract type."
+        },
+        "currency": {
+          "type": "string",
+          "description": "The currency code of the contract."
+        },
+        "current_spot": {
+          "type": ["string", "number"],
+          "description": "Spot value if we have license to stream this symbol."
+        },
+        "current_spot_display_value": {
+          "type": "string",
+          "description": "Display value of current spot"
+        },
+        "current_spot_high_barrier": {
+          "type": "string",
+          "description": "[Applicable for accumulator] High barrier based on current spot."
+        },
+        "current_spot_low_barrier": {
+          "type": "string",
+          "description": "[Applicable for accumulator] Low barrier based on current spot."
+        },
+        "current_spot_time": {
+          "type": "integer",
+          "description": "The corresponding time of the current spot."
+        },
+        "date_expiry": {
+          "type": "integer",
+          "description": "Expiry date (epoch) of the Contract. Please note that it is not applicable for tick trade contracts."
+        },
+        "date_settlement": {
+          "type": "integer",
+          "description": "Settlement date (epoch) of the contract."
+        },
+        "date_start": {
+          "type": "integer",
+          "description": "Start date (epoch) of the contract."
+        },
+        "display_name": {
+          "type": "string",
+          "description": "Display name of the underlying symbol"
+        },
+        "display_number_of_contracts": {
+          "type": "string",
+          "description": "[Only for vanilla or turbos options] The implied number of contracts"
+        },
+        "entry_spot": {
+          "type": ["null", "string", "number"],
+          "description": "The first valid underlying spot price for the contract."
+        },
+        "entry_spot_display_value": {
+          "type": "string",
+          "description": "Display value of entry spot"
+        },
+        "entry_spot_time": {
+          "type": ["integer", "null"],
+          "description": "This is the epoch time of the entry spot."
+        },
+        "entry_tick": {
+          "type": "number",
+          "description": "Entry tick value"
+        },
+        "entry_tick_display_value": {
+          "type": "string",
+          "description": "Display value of entry tick"
+        },
+        "entry_tick_time": {
+          "type": "integer",
+          "description": "Epoch time of entry tick"
+        },
+        "exit_spot": {
+          "type": ["null", "string"],
+          "description": "Exit spot can refer to the latest quote at the end time, the quote that fulfils the contract's winning or losing condition for path dependent contracts (Touch/No Touch and Stays Between/Goes Outside) or the quote at which the contract is sold before expiry."
+        },
+        "exit_spot_time": {
+          "type": ["integer", "null"],
+          "description": "This is the epoch time of the exit spot. Note that since certain instruments don't tick every second, the exit spot time may be a few seconds before the end time."
+        },
+        "expiry_time": {
+          "type": "integer",
+          "description": "This is the expiry time."
+        },
+        "growth_rate": {
+          "type": "number",
+          "description": "[Only for accumulator] Growth rate of an accumulator contract."
+        },
+        "high_barrier": {
+          "type": "string",
+          "description": "High barrier of the contract (if any)."
+        },
+        "id": {
+          "type": "string",
+          "description": "A per-connection unique identifier. Can be passed to the `forget` API call to unsubscribe."
+        },
+        "is_expired": {
+          "type": "integer",
+          "description": "Whether the contract is expired or not."
+        },
+        "is_intraday": {
+          "type": "integer",
+          "description": "Whether the contract is an intraday contract."
+        },
+        "is_path_dependent": {
+          "type": "integer",
+          "description": "Whether the contract expiry price will depend on the path of the market (e.g. One Touch contract)."
+        },
+        "is_settleable": {
+          "type": "integer",
+          "description": "Whether the contract is settleable or not."
+        },
+        "is_sold": {
+          "type": "integer",
+          "description": "Whether the contract is sold or not."
+        },
+        "is_valid_to_cancel": {
+          "type": "integer",
+          "description": "Whether the contract can be cancelled."
+        },
+        "is_valid_to_sell": {
+          "type": "integer",
+          "description": "Whether the contract can be sold back to the company."
+        },
+        "is_valid_to_update": {
+          "type": ["null", "object"],
+          "description": "[Optional] Indicator whether take profit, stop loss, and/or stop out is allowed to be updated.",
+          "properties": {
+            "stop_loss": {
+              "type": "integer",
+              "description": "Whether stop loss can be updated"
+            },
+            "stop_out": {
+              "type": "integer",
+              "description": "Whether stop out can be updated"
+            },
+            "take_profit": {
+              "type": "integer",
+              "description": "Whether take profit can be updated"
+            }
+          }
+        },
+        "limit_order": {
+          "type": "object",
+          "description": "Orders are applicable to `MULTUP` and `MULTDOWN` contracts only.",
+          "properties": {
+            "stop_loss": {
+              "type": "object",
+              "description": "Contains information where the contract will be closed automatically at the loss specified by the user.",
+              "properties": {
+                "display_name": {
+                  "type": "string",
+                  "description": "Localized display name"
+                },
+                "display_order_amount": {
+                  "type": ["null", "string"],
+                  "description": "Stop loss amount for display purpose."
+                },
+                "order_amount": {
+                  "type": ["null", "number"],
+                  "description": "Stop loss amount. Will be deprecated soon. Please use [display_order_amount]."
+                },
+                "order_date": {
+                  "type": "integer",
+                  "description": "Stop loss order epoch"
+                },
+                "value": {
+                  "type": ["null", "string"],
+                  "description": "Pip-sized barrier value"
+                }
+              }
+            },
+            "stop_out": {
+              "type": "object",
+              "description": "Contains information where the contract will be closed automatically when the value of the contract is close to zero. This is set by the us.",
+              "properties": {
+                "display_name": {
+                  "type": "string",
+                  "description": "Localized display name"
+                },
+                "display_order_amount": {
+                  "type": ["null", "string"],
+                  "description": "Stop out amount for display purpose."
+                },
+                "order_amount": {
+                  "type": ["null", "number"],
+                  "description": "Stop out amount. Will be deprecated soon. Please use [display_order_amount]."
+                },
+                "order_date": {
+                  "type": "integer",
+                  "description": "Stop out order epoch"
+                },
+                "value": {
+                  "type": "string",
+                  "description": "Pip-sized barrier value"
+                }
+              }
+            },
+            "take_profit": {
+              "type": "object",
+              "description": "Contain information where the contract will be closed automatically at the profit specified by the user.",
+              "properties": {
+                "display_name": {
+                  "type": "string",
+                  "description": "Localized display name"
+                },
+                "display_order_amount": {
+                  "type": ["null", "string"],
+                  "description": "Take profit amount for display purpose."
+                },
+                "order_amount": {
+                  "type": ["null", "number"],
+                  "description": "Take profit amount. Will be deprecated soon. Please use [display_order_amount]."
+                },
+                "order_date": {
+                  "type": "integer",
+                  "description": "Take profit order epoch"
+                },
+                "value": {
+                  "type": ["null", "string"],
+                  "description": "Pip-sized barrier value"
+                }
+              }
+            }
+          }
+        },
+        "longcode": {
+          "type": "string",
+          "description": "Text description of the contract purchased, Example: Win payout if Volatility 100 Index is strictly higher than entry spot at 10 minutes after contract start time."
+        },
+        "low_barrier": {
+          "type": "string",
+          "description": "Low barrier of the contract (if any)."
+        },
+        "multiplier": {
+          "type": "number",
+          "description": "[Only for lookback trades] Multiplier applies when calculating the final payoff for each type of lookback. e.g. (Exit spot - Lowest historical price) * multiplier = Payout"
+        },
+        "payout": {
+          "type": "string",
+          "description": "Payout value of the contract."
+        },
+        "profit": {
+          "type": ["string", "number"],
+          "description": "The latest bid price minus buy price."
+        },
+        "profit_percentage": {
+          "type": "number",
+          "description": "Profit in percentage."
+        },
+        "purchase_time": {
+          "type": "integer",
+          "description": "Epoch of purchase time, will be same as `date_start` for all contracts except forward starting contracts."
+        },
+        "reset_barrier": {
+          "type": ["null", "string"],
+          "description": "[Only for reset trades i.e. RESETCALL and RESETPUT] Reset barrier of the contract."
+        },
+        "reset_time": {
+          "type": "integer",
+          "description": "[Only for reset trades i.e. RESETCALL and RESETPUT] The epoch time of a barrier reset."
+        },
+        "selected_spot": {
+          "type": ["null", "string"],
+          "description": "Spot value at the selected tick for the contract."
+        },
+        "selected_tick": {
+          "type": "integer",
+          "description": "[Only for highlowticks trades i.e. TICKHIGH and TICKLOW] Selected tick for the contract."
+        },
+        "sell_price": {
+          "type": ["null", "string"],
+          "description": "Price at which contract was sold, only available when contract has been sold."
+        },
+        "sell_spot": {
+          "type": ["null", "string"],
+          "description": "Latest spot value at the sell time. (only present for contracts already sold). Will no longer be supported in the next API release."
+        },
+        "sell_spot_time": {
+          "type": "integer",
+          "description": "Epoch time of the sell spot. Note that since certain underlyings don't tick every second, the sell spot time may be a few seconds before the sell time. (only present for contracts already sold). Will no longer be supported in the next API release."
+        },
+        "sell_time": {
+          "type": ["integer", "null"],
+          "description": "Epoch time of when the contract was sold (only present for contracts already sold)"
+        },
+        "shortcode": {
+          "type": "string",
+          "description": "Coded description of the contract purchased."
+        },
+        "status": {
+          "type": ["null", "string"],
+          "description": "Contract status. Will be `sold` if the contract was sold back before expiry, `won` if won and `lost` if lost at expiry. Otherwise will be `open`",
+          "enum": ["open", "sold", "won", "lost", null]
+        },
+        "tick_count": {
+          "type": "integer",
+          "description": "Only for tick trades, number of ticks"
+        },
+        "tick_passed": {
+          "type": "integer",
+          "description": "[Only for accumulator] Number of ticks passed since entry_tick"
+        },
+        "tick_stream": {
+          "type": "array",
+          "description": "Tick stream from entry to end time.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "epoch": {
+                "type": "integer",
+                "description": "Epoch time of a tick or the contract start or end time."
+              },
+              "tick": {
+                "type": ["null", "number"],
+                "description": "The spot value at the given epoch."
+              },
+              "tick_display_value": {
+                "type": ["null", "string"],
+                "description": "The spot value with the correct precision at the given epoch."
+              }
+            }
+          }
+        },
+        "transaction_ids": {
+          "type": "object",
+          "description": "Every contract has buy and sell transaction ids, i.e. when you purchase a contract we associate it with buy transaction id, and if contract is already sold we associate that with sell transaction id.",
+          "properties": {
+            "buy": {
+              "type": "integer",
+              "description": "Buy transaction ID for that contract"
+            },
+            "sell": {
+              "type": "integer",
+              "description": "Sell transaction ID for that contract, only present when contract is already sold."
+            }
+          },
+          "required": ["buy"]
+        },
+        "underlying": {
+          "type": "string",
+          "description": "The underlying symbol code."
+        },
+        "underlying_symbol": {
+          "type": "string",
+          "description": "The underlying symbol code."
+        },
+        "validation_error": {
+          "type": "string",
+          "description": "Error message if validation fails"
+        },
+        "validation_error_code": {
+          "type": "string",
+          "description": "Error code if validation fails"
+        },
+        "validation_params": {
+          "type": "object",
+          "description": "Contains contract validation information.",
+          "properties": {
+            "max_payout": {
+              "type": "string",
+              "description": "[Only for Accumulators] Maximum payout for the contract."
+            },
+            "max_ticks": {
+              "type": "integer",
+              "description": "[Only for Accumulators] Maximum ticks for the contract."
+            },
+            "stake": {
+              "type": "object",
+              "description": "Contains information for minimum and maximum stake amount for the contract.",
+              "properties": {
+                "max": {
+                  "type": "string",
+                  "description": "Maximum stakes allowed"
+                },
+                "min": {
+                  "type": "string",
+                  "description": "Minimum stakes allowed"
+                }
+              }
+            },
+            "stop_loss": {
+              "type": "object",
+              "description": "[Only for Multipliers] Contains information for minimum and maximum stop loss amount for the contract.",
+              "properties": {
+                "max": {
+                  "type": "string",
+                  "description": "Maximum stop loss amount"
+                },
+                "min": {
+                  "type": "string",
+                  "description": "Minimum stop loss amount"
+                }
+              }
+            },
+            "take_profit": {
+              "type": "object",
+              "description": "Contains information for minimum and maximum take profit amount for the contract.",
+              "properties": {
+                "max": {
+                  "type": "string",
+                  "description": "Maximum take profit amount"
+                },
+                "min": {
+                  "type": "string",
+                  "description": "Minimum take profit amount"
+                }
+              }
+            }
+          }
+        }
+      },
+      "required": ["contract_id", "contract_type", "currency"]
+    },
+    "echo_req": {
+      "type": "object",
+      "description": "Echo of the request made."
+    },
+    "msg_type": {
+      "type": "string",
+      "description": "Action name of the request made.",
+      "enum": ["proposal_open_contract"]
+    },
+    "req_id": {
+      "type": "integer",
+      "description": "Optional field sent in request to map to response, present only when request contains `req_id`."
+    },
+    "subscription": {
+      "type": "object",
+      "description": "For subscription requests only.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A per-connection unique identifier. Can be passed to the `forget` API call to unsubscribe."
+        }
+      },
+      "required": ["id"]
+    }
+  },
+  "required": ["proposal_open_contract", "msg_type"],
+  "additionalProperties": false
+}
+
